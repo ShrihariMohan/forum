@@ -1,4 +1,5 @@
-Refactoring front end 
+## Refactoring front end
+
 - forEach on profile cards
 - remove unused imports
 - order imports
@@ -7,18 +8,19 @@ Refactoring front end
 - resolve a conflict b/w bootstrap and ngx-toastr
 - ngIf resolve name and ngModel problem.
 
-Rfactoring back end
+## Refactoring back end
+
 - index js clean up
 - rename postController apis
 - sort the post by date
 
+## Features
 
-features 
 - follower profile view
 
-quality of life improvements
- - more use of spinners
- - media queries for mobile version
- - dark mode
- - more toasts
+## Improvements
 
+- more use of spinners
+- media queries for mobile version
+- dark mode
+- more toasts
