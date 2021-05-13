@@ -1,0 +1,65 @@
+<nav class="navbar fixed-top navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand nav-content" href="http://localhost:4200/profile">
+            <img src="{{user.picture}}" alt="propic" width="50" height="50"
+                class="d-inline-block align-text-top proPic">
+            {{user.name}}
+        </a>
+        <a href="http://localhost:4200/" class=" nav-item feed-navbar"> Feed</a>
+        <a href="http://localhost:3500/logout" type="button" class="btn btn-outline-danger">Log out</a>
+
+    </div>
+</nav>
+<ngx-spinner [fullScreen]="false">
+</ngx-spinner>
+
+<div class="body">
+    <div class="row ">
+        <div class="col-md-8 pro-feed">
+            <form>
+                <div class="text-area">
+                    <textarea placeholder=" What's on your mind?" name="postContent" [(ngModel)]="postContent"
+                        type="text" id="exampleFormControlTextarea1" rows="4" class="textarea-form"></textarea>
+                    <button *ngIf="postContent==''" type="button"
+                        class="btn btn-outline-primary post-btn disabled">Post</button>
+                    <button *ngIf="postContent!=''" (click)="addPost()" type="button"
+                        class="btn btn-outline-primary post-btn">Post</button>
+
+                </div>
+            </form>
+            <div *ngFor="let post of feeds" class="card border-light ">
+                <div class="card-body">
+                    <div class="profile">
+                        <div style="display: flex;">
+                            <img class="card-pic" src="{{post.picture}}" alt="profile picture" />
+                            <div style="margin-left: 4px;">
+                                <p class="post-name">
+                                    {{post.name}}
+                                </p>
+                                <span class="post-date">
+                                    {{post.createdOn}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-text post-content">{{ post.content }}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 suggestions" style="height: 40vh;">
+            <p class="heading">People You May Know</p>
+            <div *ngFor="let profile of filteredProfiles" class="card mb-3 border-light">
+                <div class="card-body" style="text-align: center">
+                    <a class="navbar-brand nav-content">
+                        <img src="{{ profile.picture }}" alt="propic" width="100" height="100"
+                            class="d-inline-block align-text-top proPic" />
+                    </a>
+                    <h5 class="card-title">{{ profile.name }}</h5>
+                    <button (click)="addFollower(profile._id)" class="btn btn-primary">Follow</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand nav-content" href="http://localhost:4200/">
+            Forum
+        </a>
+        <a href="http://localhost:3500/logout" type="button" class="btn btn-outline-danger">Log out</a>
+
+    </div>
+</nav>
+<ngx-spinner [fullScreen]="false"> </ngx-spinner>
+<div class="body">
+    <div class="card mb-3 border-light">
+        <div class="card-body" style="text-align: center">
+            <a class="navbar-brand nav-content">
+                <img src="{{ user.picture }}" alt="propic" width="100" height="100"
+                    class="d-inline-block align-text-top proPic" />
+            </a>
+            <h5 class="card-title post-name">{{ user.name }}</h5>
+            <p *ngIf="!aboutFlag" class="card-text post-content">{{ user.about }}</p>
+            <div style="display: flex; justify-content: center;">
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <form *ngIf="aboutFlag">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label" [(ngModel)]="aboutContent">{{ aboutContent
+                            }}</label>
+                        <input name="about" type="text" class="form-control mb-2 profile-form" id="exampleInputEmail1"
+                            name="aboutContent" [(ngModel)]="aboutContent" aria-describedby="emailHelp"
+                            (onfocusout)="outOfFocus()" />
+                        <button type="button" class="btn btn-outline-success btn-sm" (click)="updateAbout()">
+                            Done
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-sm profile-but" (click)="about()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <button *ngIf="!aboutFlag" type="button" (click)="about()" class="btn btn-outline-primary btn-sm">
+                Edit
+            </button>
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="col-md-8 pro-feed">
+            <p class="heading">Your Posts</p>
+
+            <div *ngFor="let post of posts" class="card border-light ">
+                <div class="card-body">
+                    <div class="profile">
+                        <div style="display: flex;">
+                            <img class="card-pic" src="{{post.picture}}" alt="profile picture" />
+                            <div style="margin-left: 4px;">
+                                <p class="post-name">
+                                    {{post.name}}
+                                </p>
+                                <span class="post-date">
+                                    {{post.createdOn}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <span (click)="delete(post._id)" class="far fa-trash-alt del-but"></span>
+                    </div>
+                    <p class="card-text post-content">{{ post.content }}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p class="heading">People You Follow</p>
+            <div *ngFor="let friend of following" class="card mb-3 border-light">
+                <div class="card-body" style="text-align: center">
+                    <a class="navbar-brand nav-content">
+                        <img src="{{ friend.picture }}" alt="propic" width="100" height="100"
+                            class="d-inline-block align-text-top proPic" />
+                    </a>
+                    <h5 class="card-title">{{ friend.name }}</h5>
+                    <button (click)="unfollow(friend)" type="button" class="btn btn-danger btn-sm">Unfollow</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
